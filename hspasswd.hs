@@ -31,10 +31,7 @@ main = scotty 3000 $ do
 		username <-  liftIO $ getEnv "REMOTE_USER"
 		(exitcode, stdout, stderr) <- liftIO $ changePassword username password newPassword
 		page <- liftIO $ outputText exitcode username stderr
-		html $ page
-	get "/test" $ do
-		page <- liftIO $ renderErrorPage "test"
-		html $ page
+		html page
 
 changePassword username password newPassword = do
 	(exitcode, stdout, stderr) <- readProcessWithExitCode "/usr/bin/su" ["-l", username, "-c", "passwd"] (password++"\n"++password++"\n"++newPassword++"\n"++newPassword++"\n")
@@ -48,4 +45,7 @@ renderErrorPage error = do
 
 outputText exitcode username stderr
 	| exitcode == ExitSuccess = renderErrorPage ("Password successfully changed for "++username++".")
-	| otherwise = renderErrorPage stderr
+	| otherwise = renderErrorPage $ filterError stderr
+
+filterError stderr =
+	Prelude.concat [ Prelude.concat ["<p>", line, "</p>"] | line <- Prelude.lines stderr]
