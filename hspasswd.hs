@@ -15,16 +15,13 @@ import System.Exit
 main :: IO ()
 main = scotty 3000 $ do
 
-	get "/" $
-		html $ mconcat ["<form method=POST action=\"cpw\">"
-			,"<p>Old password:</p>"
-			,"<input type=\"password\" name=password>"
-			,"<p>New password:</p>"
-			,"<input type=\"password\" name=newPassword>"
-			,"<input type=submit>"
-			,"</form>"
-		]
+	get "/" $ file "index.html"
 
+	get "/images/:handle" $ do
+		handle <- param "handle"
+		file $ "images/" ++ unpack handle
+	get "/style.css" $ file "style.css"
+	
 	post "/cpw" $ do
 		password <- param "password"
 		newPassword <- param "newPassword"

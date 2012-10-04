@@ -1,0 +1,142 @@
+body
+{
+	background-color: #eeeeee;
+	background-image: url("images/tile.png");
+	background-repeat: repeat;
+	font-family: sans-serif; 
+	font-size: .9em;
+	margin: 0px;
+	padding: 0px;
+}
+
+label
+{
+	color: #830027;
+}
+
+#centered-container
+{
+	margin: auto;
+	margin-top: 5px;
+	width: 500px;
+}
+
+#top-left-edge
+{
+	background-image: url("images/left_top_corner.png");
+	background-repeat: no-repeat;
+	height: 20px;
+}
+
+#top-right-edge
+{
+	background-image: url("images/right_top_corner.png");
+	background-position: right;
+	background-repeat: no-repeat;
+	height: 20px;
+}
+
+#top-edge-container
+{
+	background-image: url("images/top_shadow.png");
+	background-position: top;
+	background-repeat: repeat-x;
+	height: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#left-edge-container
+{
+	background-image: url("images/left_shadow.png");
+	background-repeat: repeat-y;
+	background-position: left;
+	padding-left: 20px;
+}
+
+#right-edge-container
+{
+	background-image: url("images/right_shadow.png");
+	background-repeat: repeat-y;
+	background-position: right;
+	/* +2 padding to fix border offset */
+	padding-right: 22px;
+	padding-bottom: -20px;
+}
+
+#header
+{
+	background-color: #a5afb0;
+	background-image: url("images/header.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	border-left: 1px solid #830027;
+	border-right: 1px solid #830027;
+	border-top: 1px solid #830027;
+	height: 144px;
+	width: 100%;
+}
+
+#header h1
+{
+	color: #830027;
+	font-size: 1.8em;
+	font-weight: normal; 
+	padding-top: 50px;
+	margin-left: 150px;
+	margin-top: 0px;
+	text-align: center;
+}
+
+#content-container
+{
+	background-color: #eeeeee;
+	border: 1px solid #830027;
+	width: 100%;
+}
+
+#bottom-left-edge
+{
+	background-image: url("images/left_corner.png");
+	background-repeat: no-repeat;
+	height: 20px;
+}
+
+#bottom-right-edge
+{
+	background-image: url("images/right_corner.png");
+	background-position: right;
+	background-repeat: no-repeat;
+	height: 20px;
+}
+
+#bottom-edge-container
+{
+	background-image: url("images/bottom_shadow.png");
+	background-position: bottom;
+	background-repeat: repeat-x;
+	height: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#content-box
+{
+	margin: 20px auto;
+	width: 80%;
+}
+
+#content-img
+{
+	margin: -12px 0px 0px 20px;
+	float: right;
+}
+
+#lower-content
+{
+	clear: both;
+	text-align: center;
+	padding: 5px;
+	color: #333333;
+}
+
