@@ -15,23 +15,22 @@ import System.Exit
 main :: IO ()
 main = scotty 3000 $ do
 
-    get "/" $
-        html $ mconcat ["<form method=POST action=\"cpw\">"
-                       ,"<p>Old password:</p>"
-                       ,"<input type=\"password\" name=password>"
-                       ,"<p>New password:</p>"
-                       ,"<input type=\"password\" name=newPassword>"
-                       ,"<input type=submit>"
-                       ,"</form>"
-                       ]
+	get "/" $
+		html $ mconcat ["<form method=POST action=\"cpw\">"
+			,"<p>Old password:</p>"
+			,"<input type=\"password\" name=password>"
+			,"<p>New password:</p>"
+			,"<input type=\"password\" name=newPassword>"
+			,"<input type=submit>"
+			,"</form>"
+		]
 
-    post "/cpw" $ do
-	password <- param "password"
-	newPassword <- param "newPassword"
-	username <-  liftIO $ getEnv "REMOTE_USER"
-	(exitcode, stdout, stderr) <- liftIO $ changePassword username password newPassword
-	let success = (exitcode == ExitSuccess)
-	text $ mconcat [ pack $ outputText exitcode username stderr]
+	post "/cpw" $ do
+		password <- param "password"
+		newPassword <- param "newPassword"
+		username <-  liftIO $ getEnv "REMOTE_USER"
+		(exitcode, stdout, stderr) <- liftIO $ changePassword username password newPassword
+		text $ pack $ outputText exitcode username stderr
 	
 changePassword username password newPassword = do
 	(exitcode, stdout, stderr) <- readProcessWithExitCode "/usr/bin/su" ["-l", username, "-c", "passwd"] (password++"\n"++password++"\n"++newPassword++"\n"++newPassword++"\n")
