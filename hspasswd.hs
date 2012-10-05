@@ -48,4 +48,11 @@ outputText exitcode username stderr
 	| otherwise = renderErrorPage $ filterError stderr
 
 filterError stderr =
-	Prelude.concat [ Prelude.concat ["<p>", line, "</p>"] | line <- Prelude.lines stderr]
+	Prelude.concat [ Prelude.concat ["<p>", errorMap line, "</p>"] | line <- Prelude.lines stderr]
+
+errorMap stderr
+	| stderr == "Password: /usr/bin/su: incorrect password" = "Current password entry was incorrect."
+	| stderr == "passwd: Have exhausted maximum number of retries for service" = ""
+	| stderr == "Password: (current) UNIX password: New password: BAD PASSWORD: The password fails the dictionary check - it is based on a dictionary word" = ""
+	| stderr == "Password: (current) UNIX password: New password: BAD PASSWORD: The password is shorter than 7 characters" = ""
+	| otherwise = stderr
