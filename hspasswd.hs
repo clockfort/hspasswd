@@ -16,7 +16,7 @@ import Data.Maybe
 import Text.StringTemplate
 
 main :: IO ()
-main = scotty 3000 $ do
+main = scotty 3006 $ do
 
 	get "/" $ file "index.html"
 
