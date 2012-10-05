@@ -14,6 +14,10 @@ import System.Exit
 
 import Data.Maybe
 import Text.StringTemplate
+import Data.Map((!))  -- !!!
+import qualified Data.Map as Map
+import qualified Data.ByteString as BS
+import qualified Data.ByteString.Char8 as C
 
 main :: IO ()
 main = scotty 3006 $ do
@@ -28,7 +32,8 @@ main = scotty 3006 $ do
 	post "/cpw" $ do
 		password <- param "password"
 		newPassword <- param "newPassword"
-		username <-  liftIO $ getEnv "REMOTE_USER"
+		req <- request
+		let username = C.unpack ((Map.fromList $ requestHeaders req) ! "X-WEBAUTH-USER")
 		(exitcode, stdout, stderr) <- liftIO $ changePassword username password newPassword
 		page <- liftIO $ outputText exitcode username stderr
 		html page
